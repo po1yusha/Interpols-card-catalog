@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Crime list</title>
+    <style>
+        #new_crime {
+            background: rgba(102, 102, 102, 0.5);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        #window {
+            width: 80%;
+            padding: 15px;
+            border: 1px solid rgba(0, 110, 155, 1.0);
+            border-radius: 10px;
+            margin: 3% 10%;
+            background: #fff;
+        }
+
+        #new_crime:target {
+            display: block;
+        }
+
+        #finder {
+            background: rgba(102, 102, 102, 0.5);
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        #window_find {
+            padding: 15px;
+            border: 1px solid rgba(0, 110, 155, 1.0);
+            border-radius: 10px;
+            margin: 3% 37%;
+            background: #fff;
+        }
+
+        #finder:target {
+            display: block;
+        }
+
+        .item {
+            margin-right: 20px;
+            flex-basis: 25%;
+            font-weight: 600;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="new_crime">
+    <div id="window">
+        <div>
+            <div style="display:inline-flex; flex-wrap: wrap; margin-top: 10px; justify-content: center;">
+                <legend style="text-align: center;">Add offender</legend>
+                <div class="item">
+                    Second name <span class="red">*</span>
+                    <input id="form_second_name" type="text" class="form-control" name="second_name"
+                           value="{{second_name}}">
+                </div>
+                <div class="item">
+                    Name <span class="red">*</span>
+                    <input id="form_name" type="text" class="form-control" name="name" value="{{name}}"><br>
+                </div>
+                <div class="item">
+                    Sex <span class="red">*</span>
+                    <input id="form_sex" type="text" class="form-control" name="sex" value="{{sex}}"><br>
+                </div>
+                <div class="item">
+                    Alias
+                    <input id="form_alias" type="text" class="form-control" name="sex" value="{{alias}}"><br>
+                </div>
+                <div class="item">
+                    Height
+                    <input id="form_height" type="text" class="form-control" name="height" value="{{height}}"><br>
+                </div>
+                <div class="item">
+                    Hair color
+                    <input id="form_hair_color" type="text" class="form-control" name="hair_color"
+                           value="{{hair_color}}"><br>
+                </div>
+                <div class="item">
+                    Eye color
+                    <input id="form_eye_color" type="text" class="form-control" name="eye_color"
+                           value="{{eye_color}}"><br>
+                </div>
+                <div class="item">
+                    Special features
+                    <input id="form_special_features" type="text" class="form-control" name="eye_color"
+                           value="{{special_features}}"><br>
+                </div>
+                <div class="item">
+                    Citizenship
+                    <input id="form_citizenship" type="text" class="form-control" name="citizenship"
+                           value="{{citizenship}}"><br>
+                </div>
+                <div class="item">
+                    Residence
+                    <input id="form_residence" type="text" class="form-control" name="eye_color"
+                           value="{{residence}}"><br>
+                </div>
+                <div class="item">
+                    Language
+                    <input id="form_language" type="text" class="form-control" name="language" value="{{language}}"><br>
+                </div>
+                <div class="item">
+                    Place of birth
+                    <input id="form_place_of_birth" type="text" class="form-control" name="place_of_birth"
+                           value="{{place_of_birth}}"><br>
+                </div>
+                <div class="item">
+                    Date of birth <span class="red">*</span>
+                    <input id="form_date_of_birth" type="text" class="form-control" name="date_of_birth"
+                           value="{{date_of_birth}}"><br>
+                </div>
+                <div class="item">
+                    Criminal profession <span class="red">*</span>
+                    <input id="form_criminal_profession" type="text" class="form-control" name="profession"
+                           value="{{criminal_profession}}"><br>
+                </div>
+                <div class="item">
+                    Last crime
+                    <input id="form_last_crime" type="text" class="form-control" name="profession"
+                           value="{{last_crime}}"><br>
+                </div>
+                <div class="item">
+                    Criminal group
+                    <input id="form_criminal_group" type="text" class="form-control" name="group"
+                           value="{{group_criminal}}"><br>
+                </div>
+            </div>
+
+            <button onclick="sendForm()" class="btn"
+                    style="background: rgb(0,110, 155);border: 1px solid rgb(180, 180, 180); color: white; margin: 10px 10px 20px 45%; padding: 10px 15px;">
+                Add
+            </button>
+
+            <a href="" class="btn"
+               style="background: rgb(0,110, 155);border: 1px solid rgb(180, 180, 180); color: white; margin: 10px 10px 20px 0px;padding: 10px 15px;">Close</a>
+
+            <div id="error_message_area" style="display: none" class="item alert alert-danger" role="alert"></div>
+        </div>
+    </div>
+</div>
+
+<div id="finder">
+    <div id="window_find">
+        <div>
+            <div style="display:inline-flex; flex-wrap: wrap; margin-top: 10px; justify-content: center;">
+                <legend style="text-align: center;">Find offender</legend>
+                <form action="/offenders" method="get">
+                    <div class="item">
+                        Second name
+                        <input  type="text" class="form-control" name="second_name"
+                               value="">
+                    </div>
+                    <div class="item">
+                        Name
+                        <input  type="text" class="form-control" name="name" value=""><br>
+                    </div>
+                    <div class="item">
+                        Alias
+                        <input  type="text" class="form-control" name="sex" value=""><br>
+                    </div>
+                    <div class="item">
+                        Hair color
+                        <input  type="text" class="form-control" name="hair_color"
+                               value=""><br>
+                    </div>
+                    <div class="item">
+                        Eye color
+                        <input  type="text" class="form-control" name="eye_color"
+                               value=""><br>
+                    </div>
+                    <div class="item">
+                        Criminal profession
+                        <input type="text" class="form-control" name="profession"
+                               value=""><br>
+                    </div>
+
+
+                <button type="submit" class="btn"
+                        style="background: rgb(0,110, 155);border: 1px solid rgb(180, 180, 180); color: white; margin: 10px 10px 20px; padding: 10px 15px;">
+                    Find
+                </button>
+
+                <a href="" class="btn"
+                   style="background: rgb(0,110, 155);border: 1px solid rgb(180, 180, 180); color: white; margin: 10px 10px 20px 0px;padding: 10px 15px;">Close</a>
+
+                <div style="display: none" class="item alert alert-danger" role="alert"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <header class="sticky-top d-flex flex-wrap justify-content-center
+                       py-3 mb-4"
+            style="background-color: rgba(255, 255, 255, 1.0);border-bottom: 1px solid rgb(0, 110, 155);z-index: 0">
+
+        <a href="#" class="d-flex align-items-center mb-3 mb-md-0
+                            me-md-auto text-dark text-decoration-none">
+            <img src="{{url_for('static', filename='images/intelpolLogo.jpg')}}" style="width: 118px;height: 50px">
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a style="color: rgb(0,110, 155); font-weight: 600; font-size: 18px" href="#finder"
+                                    class="nav-link">Find by</a></li>
+            <li class="nav-item"><a style="color: rgb(0,110, 155); font-weight: 600; font-size: 18px"
+                                    href="/offenders#new_crime" class="nav-link">Add new crime</a></li>
+            <li class="nav-item"><a style="color: rgb(0,110, 155); font-weight: 600; font-size: 18px" href="/offenders/archive"
+                                    class="nav-link">Archive</a></li>
+        </ul>
+
+        <div class="d-flex justify-content-center align-items-center"
+             style="margin-left: 5%;">
+            <span style="color: rgb(40, 150, 195); font-weight: bold; font-size: 18px; margin: 10px">Hello, {{user_name}}</span>
+            <form action="/api/exit" method="post">
+                <button class="btn"
+                        style="background: rgb(0,110, 155);border: 1px solid rgb(180, 180, 180); color: white;">Log out
+                </button>
+            </form>
+        </div>
+    </header>
+    <div style="display: inline-flex; flex-wrap: wrap;">
+        {% for item in offender_list %}
+        <div class="justify-content-center align-items-center shadow p-3 mb-5 rounded"
+             style="border: 1px solid rgb(0, 110, 155); margin: 25px;
+                 padding: 5px; display: inline-flex; flex-wrap: wrap;
+                 border-radius: 40px; flex-basis: 27%; background-color: rgba(243, 243, 243, 1)">
+            <div>
+                <img src="{{url_for('static', filename='images/defPhoto.jpg')}}" style="border-radius: 10%">
+            </div>
+            <div style="margin: 10px 10px 10px 30px">
+                <div style="margin: 10px">
+                    <span style="font-weight: 600;font-size: 20px">Identity particulars</span><br>
+                </div>
+                <span style="font-weight:500;">Name:</span> {{item.name}} <br>
+                <span style="font-weight:500;">Surname:</span> {{item.second_name}} <br>
+                <span style="font-weight:500;">Alias:</span> {{item.alias}} <br>
+                <span style="font-weight:500;">Date of birth:</span> {{item.date_of_birth}} <br>
+                <span style="font-weight:500;">Criminal profession:</span> {{item.criminal_profession}} <br>
+                <a href="api/offenders/personal?id={{item.id}}">More information...</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+<script>
+    async function sendForm() {
+        let form = buildForm(["form_second_name", "form_name", "form_sex", "form_alias", "form_height",
+            "form_hair_color", "form_eye_color", "form_special_features", "form_citizenship", "form_residence",
+            "form_language", "form_place_of_birth", "form_date_of_birth", "form_criminal_profession", "form_last_crime",
+            "form_criminal_group"])
+
+        let response = await fetch("/api/offenders/new", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(form)
+        })
+        const content = await response.json();
+        if(content["error"]) {
+            showMessage(content["error"])
+        }
+        else{
+            window.location.assign("/offenders")
+        }
+    }
+
+    function buildForm(idList) {
+        let form = {}
+
+        for (const id of idList) {
+            let value = document.getElementById(id).value
+            let name = id.replace("form_", "")
+            form[name] = value
+        }
+        return form
+    }
+
+    function showMessage(message) {
+        let element = document.getElementById("error_message_area");
+        element.style.display = "block";
+        element.innerText = message
+    }
+</script>
+</html>

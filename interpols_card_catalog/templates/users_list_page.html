@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+{{message}}
+<div style="position: absolute;top:10px;right:10px">
+    Hello, {{user_name}}
+    <form action="/api/exit" method="post">
+        <button>Exit</button>
+    </form>
+</div>
+
+<table border="1">
+    <tr>
+        <td>Name</td>
+        <td>Login</td>
+        <td>Action</td>
+    </tr>
+    {% for item in user_list %}
+    <tr>
+        <td>{{item.name}}</td>
+        <td>{{item.login}}</td>
+        <td>
+            <a href="/api/users/delete?login={{item.login}}">
+                <button>Delete</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<a href="/users/create">
+    <button>Add user</button>
+</a>
+</body>
+</html>
